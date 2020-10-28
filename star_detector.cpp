@@ -6,11 +6,15 @@
  * Star検出器を用いた特徴量抽出を行う
  * @param img 特徴量を抽出したい画像
  * @param keypoint 特徴量を保持する配列
+ * @param descriptors 計算後のdescriptors?
  */
-void StarAlgorithm(cv::Mat &img, std::vector<cv::KeyPoint> &keypoint)
+// WARNING: descriptorsがよくわからない. 要調査
+void StarAlgorithm(cv::Mat &img, std::vector<cv::KeyPoint> &keypoint, cv::Mat &descriptors)
 {
     cv::Ptr<cv::xfeatures2d::StarDetector> detector = cv::xfeatures2d::StarDetector::create();
     detector->detect(img, keypoint);
+    // detector->compute(img, keypoint, descriptors);
+    // detector->detectAndCompute(img, cv::noArray(), keypoint, descriptors);
 }
 
 /**
@@ -35,7 +39,9 @@ void ShowDetectorPoint(cv::Mat img, std::vector<cv::KeyPoint> *keypoint)
  * @param keypoint 描画したい特徴量
  * @param fileName 保存名
  */
-void SaveImageWithDetector(cv::Mat img, std::vector<cv::KeyPoint> *keypoint, std::string fileName)
+void SaveImageWithDetector(cv::Mat img,
+                           std::vector<cv::KeyPoint> *keypoint,
+                           std::string fileName)
 {
     cv::drawKeypoints(img,
                       *keypoint,
