@@ -57,12 +57,12 @@ bool getFileImage(std::string filePath, cv::Mat &img) {
  * @return 読み込みに成功したかどうか
  */
 // HACK: 画像のやり取り部分もう少し最適化出来るはず
-bool getFileImages(std::vector<std::string> filesPath, std::vector<cv::Mat*> &images) {
+bool getFileImages(std::vector<std::string> filesPath, std::vector<cv::Mat> &images) {
     for(auto filePath : filesPath )
     {
         cv::Mat image;
         // 画像の読み込みに失敗した際は処理を中断する
-        if( getFileImage(filePath, image) ) images.push_back(&image);
+        if( getFileImage(filePath, image) ) images.push_back(image);
         else return false;
     }
     return true;
