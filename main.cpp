@@ -21,5 +21,7 @@ int main()
     getFileNames(folderPath, fileNames);
     getFileImages(fileNames, images);
 
-    StarAlgorithm(images[0]);
+    std::vector<cv::KeyPoint> keypoint;
+    StarAlgorithm(images[0], keypoint);
+    ShowDetectorPoint(images[0], &keypoint);
 }
