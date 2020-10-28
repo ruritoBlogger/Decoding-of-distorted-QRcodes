@@ -1,9 +1,21 @@
 import cv2
 import os
+from typing import List
+import numpy as np
 
-def getFileNames(folderPath: str) -> [str]:
-    """指定されたディレクトリの中に存在する画像名を全て取得する
-    :param: folderPath 画像が保存されているパス
-    :return: 複数の画像名をlistで返す
+def read_data(path: str) -> List[np.ndarray]:
+    """pathに存在する画像を読み取り返す
+
+    :param path 画像が保存されている相対パス:
+    :return images 読み出した画像が格納されている配列:
     """
-    return os.listdir(folderPath)
+
+    images = []
+    print("[{}] data path is {}".format(os.path.basename(__file__), path))
+
+    for data in os.listdir(path):
+        data = path + '/' + data
+        print(data)
+        images.append(cv2.imread(data))
+
+    return images

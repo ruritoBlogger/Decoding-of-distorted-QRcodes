@@ -1,9 +1,10 @@
-from read_data import getFileNames
+from read_data import read_data
+from typing import List
+import numpy as np
 
 def main():
-    folderPath: str = "../data"
-    fileNames: [str] = getFileNames(folderPath)
-    print(fileNames)
+    path: str = '../data'
+    images: List[np.ndarray] = read_data(path)
 
 if __name__ == "__main__":
     main()
