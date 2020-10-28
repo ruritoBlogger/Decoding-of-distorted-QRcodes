@@ -14,10 +14,10 @@
 int main()
 {
     // 画像の保存先ディレクトリ
-    std::string folderPath = "./data";
+    std::string folderPath = "../data";
 
     // 教師画像と特徴量
-    std::string teacherImagePath = "./qrcode.png";
+    std::string teacherImagePath = "../qrcode.png";
     cv::Mat teacherImage;
     std::vector<cv::KeyPoint> teacherDetectorKeypoint;
     cv::Mat teacherDescrptors;
