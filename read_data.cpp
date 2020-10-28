@@ -45,7 +45,7 @@ bool getFileImage(std::string filePath, cv::Mat &img) {
     if( img.empty() )
     {
         std::cout << "{read_data.cpp}[img load] " << "cannot read img" << std::endl;
-         return false;
+        return false;
     }
     else return true;
 }
