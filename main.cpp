@@ -22,6 +22,7 @@ int main()
     std::vector<cv::KeyPoint> teacherDetectorKeypoint;
     cv::Mat teacherDescrptors;
     getFileImage(teacherImagePath, teacherImage);
+    // TODO: StarAlgorithmを動作するようにする
     // StarAlgorithm(teacherImage, teacherDetectorKeypoint, teacherDescrptors);
     AkazeAlgorithm(teacherImage, teacherDetectorKeypoint, teacherDescrptors);
 
@@ -34,21 +35,27 @@ int main()
     getFileNames(folderPath, fileNames);
     getFileImages(fileNames, images);
 
+    // 各画像に対して教師画像と比較し、位置検出を行う
     for( auto image : images)
     {
         std::vector<cv::KeyPoint> keypoint;
         cv::Mat descriptors;
+        // TODO: StarAlgorithmでも動作するようにする
         // StarAlgorithm(images[0], keypoint, descriptors);
         AkazeAlgorithm(image, keypoint, descriptors);
-        // ShowDetectorPoint(images[0], &keypoint);
 
         // 教師画像の特徴量と比較する
         std::vector<cv::DMatch> good_matches;
         BFMatch(&teacherDescrptors, &descriptors, good_matches);
 
+        // HACK: 機能毎に関数切り分けをやる
+        // NOTE: 以下はサンプルコードコピペのため内容を理解する必要あり
+        // link https://jitaku.work/it/image-processing/opencv/featurematching/akaze/
         cv::Mat matches_image;
         cv::drawMatches(teacherImage, teacherDetectorKeypoint, image, keypoint, good_matches, matches_image, cv::Scalar::all(-1), cv::Scalar::all(-1), std::vector<char>(), cv::DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS);
 
+        // 一致した特徴量？から位置情報を抽出する...?
+        // XXX: サンプルコピペだから何故動くのか不明
         std::vector<cv::Point2f> obj;
         std::vector<cv::Point2f> scene;
         std::cout << "good_matches.size()=" << good_matches.size() << std::endl;
