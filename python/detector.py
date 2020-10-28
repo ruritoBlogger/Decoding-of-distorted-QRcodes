@@ -30,3 +30,12 @@ def show_detector_point(image: np.ndarray, keypoint: List[any]) -> None:
     cv2.drawKeypoints(image, keypoint, image)
     cv2.imshow("特徴量を描画した画像", image)
     cv2.waitKey(0)
+
+def save_image_with_detector(image: np.ndarray, keypoint: List[any], fileName: str) -> None:
+    """特徴量をプロットした画像を保存する
+    :param: image 特徴量を抽出した画像
+    :param: keypoint 特徴量
+    :param: fileName 保存名
+    """
+    cv2.drawKeypoints(image, keypoint, image)
+    cv2.imwrite(fileName, image)
