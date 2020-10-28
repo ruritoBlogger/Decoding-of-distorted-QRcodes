@@ -20,7 +20,7 @@ bool getFileNames(std::string folderPath, std::vector<std::string> &fileNames)
         const directory_entry entry = *iter;
 
         fileNames.push_back( entry.path().string() );
-        printf("%s\n", fileNames.back().c_str());
+        // std::cout << fileNames.back() << std::endl;
     }
 
     // エラー処理
@@ -35,9 +35,8 @@ bool getFileNames(std::string folderPath, std::vector<std::string> &fileNames)
 
 /**
  * ファイル名の画像を読み込んでCV::Matとして返す
- * @param[in] filePath: 読み込みたい画像のパス
- * @param[out] img: 読み込みたい画像を格納する
- * @return 読み込みに成功したかどうか
+ * @param filePath: 読み込みたい画像のパス
+ * @return 画像のポインタ or NULL
  */
 bool getFileImage(std::string filePath, cv::Mat &img) {
     img = cv::imread(filePath);
@@ -47,5 +46,24 @@ bool getFileImage(std::string filePath, cv::Mat &img) {
         std::cout << "{read_data.cpp}[img load] " << "cannot read img" << std::endl;
         return false;
     }
-    else return true;
+    return true;
+}
+
+/**
+ * ファイル名の画像を読み込んでCV::Matとして返す
+ * 複数の画像を取得出来る
+ * @param filesPath: 読み込みたい画像のパスが格納されている配列
+ * @param images: 読み込みたい画像を格納する
+ * @return 読み込みに成功したかどうか
+ */
+// HACK: 画像のやり取り部分もう少し最適化出来るはず
+bool getFileImages(std::vector<std::string> filesPath, std::vector<cv::Mat*> &images) {
+    for(auto filePath : filesPath )
+    {
+        cv::Mat image;
+        // 画像の読み込みに失敗した際は処理を中断する
+        if( getFileImage(filePath, image) ) images.push_back(&image);
+        else return false;
+    }
+    return true;
 }
