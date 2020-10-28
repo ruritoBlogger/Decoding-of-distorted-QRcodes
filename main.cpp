@@ -5,7 +5,7 @@
 
 #include "read_data.cpp"
 #include "star_detector.cpp"
-#include "match_detector.cpp"
+#include "detector.cpp"
 
 /**
  * 複数の画像に対してStar検出器を用いて位置検出を行う
