@@ -14,7 +14,9 @@ void StarAlgorithm(cv::Mat &img, std::vector<cv::KeyPoint> &keypoint)
 }
 
 /**
- * 
+ * 引数の特徴量を画像に描画して表示する
+ * @param img 描画先の画像
+ * @param keypoint 描画したい特徴量
  */
 void ShowDetectorPoint(cv::Mat img, std::vector<cv::KeyPoint> *keypoint)
 {
