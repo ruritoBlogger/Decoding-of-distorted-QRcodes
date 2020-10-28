@@ -15,7 +15,6 @@ def read_data(path: str) -> List[np.ndarray]:
 
     for data in os.listdir(path):
         data = path + '/' + data
-        print(data)
         images.append(cv2.imread(data))
 
     return images
