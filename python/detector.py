@@ -1,5 +1,4 @@
 import cv2
-from cv2 import xfeatures2d
 import numpy as np
 from typing import List
 
@@ -9,7 +8,7 @@ def star_algorithm(image: np.ndarray) -> np.ndarray:
     :return: 特徴量
     """
 
-    star = xfeatures2d.StarDetector_create()
+    star = cv2.xfeatures2d.StarDetector_create()
     return star.detect(image, None)
     # return star.detectAndCompute(image, None)
 
